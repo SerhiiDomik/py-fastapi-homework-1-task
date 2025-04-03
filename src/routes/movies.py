@@ -4,12 +4,12 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from database import get_db
 from database.models import MovieModel
-from schemas.movies import MovieDetailResponse, MovieListResponse
+from schemas.movies import MovieDetailResponseSchema, MovieListResponseSchema
 
 router = APIRouter(prefix="/movies", tags=["movies"])
 
 
-@router.get("/", response_model=MovieListResponse)
+@router.get("/", response_model=MovieListResponseSchema)
 async def get_movies(
         page: int = Query(1, ge=1),
         per_page: int = Query(10, ge=1, le=20),
@@ -43,7 +43,7 @@ async def get_movies(
     }
 
 
-@router.get("/{movie_id}/", response_model=MovieDetailResponse)
+@router.get("/{movie_id}/", response_model=MovieDetailResponseSchema)
 async def get_movie_detail(
         movie_id: int,
         db: AsyncSession = Depends(get_db)
