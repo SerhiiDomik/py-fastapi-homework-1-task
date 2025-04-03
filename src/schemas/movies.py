@@ -1,6 +1,7 @@
 from pydantic import BaseModel
 from typing import List, Optional
 
+
 class MovieBase(BaseModel):
     name: str
     date: str
@@ -15,9 +16,6 @@ class MovieBase(BaseModel):
     revenue: int
     country: str
 
-class MovieCreate(MovieBase):
-    pass
-
 
 class MovieDetailResponse(MovieBase):
     id: int
@@ -26,7 +24,7 @@ class MovieDetailResponse(MovieBase):
         from_attributes = True
 
 
-class MovieListResponseSchema(BaseModel):
+class MovieListResponse(BaseModel):
     movies: List[MovieDetailResponse]
     prev_page: Optional[str] = None
     next_page: Optional[str] = None
