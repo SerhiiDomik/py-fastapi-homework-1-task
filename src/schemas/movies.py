@@ -1,9 +1,13 @@
-from pydantic import BaseModel
-from typing import List, Optional
+from datetime import date
+from typing import Optional, List
 
-class MovieBase(BaseModel):
+from pydantic import BaseModel
+
+
+class MovieDetailResponseSchema(BaseModel):
+    id: int
     name: str
-    date: str
+    date: date
     score: float
     genre: str
     overview: str
@@ -11,13 +15,9 @@ class MovieBase(BaseModel):
     orig_title: str
     status: str
     orig_lang: str
-    budget: int
-    revenue: int
+    budget: float
+    revenue: float
     country: str
-
-
-class MovieDetailResponseSchema(MovieBase):
-    id: int
 
     class Config:
         from_attributes = True
@@ -29,3 +29,6 @@ class MovieListResponseSchema(BaseModel):
     next_page: Optional[str] = None
     total_pages: int
     total_items: int
+
+    class Config:
+        from_attributes = True
